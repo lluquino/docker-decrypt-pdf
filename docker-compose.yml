@@ -1,0 +1,13 @@
+services:
+  pdf-decryptor:
+    build: .
+    container_name: pdf-decryptor
+    restart: unless-stopped
+    environment:
+      PDF_PASSWORD: "${PDF_PASSWORD}"   # required
+      SCAN_INTERVAL: "${SCAN_INTERVAL:-60}"
+      # Optional: uncomment to run as a specific user
+      # PUID: "1000"
+      # PGID: "1000"
+    volumes:
+      - "${WATCH_FOLDER:-./watch}:/watch"
